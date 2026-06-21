@@ -1,0 +1,4 @@
+TICKERS = ["AAPL", "MSFT", "JPM", "GS", "XOM", "JNJ", "TSLA", "NVDA", "KO", "WMT"]
+
+START = "2019-01-01"
+END = "2024-01-01"
