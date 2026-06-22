@@ -70,24 +70,28 @@ The analysis transforms raw price data into meaningful financial insights throug
 
 ## Project Structure
 
+## Project Structure
+
 ```text
-project/
+Financial-Data-Explorer/
 │
 ├── data/
 │   ├── raw/
+│   │   └── prices.csv
+│   │
 │   └── processed/
 │
-├── notebooks/
+├── notebook/
 │   └── 01_data_exploration.ipynb
 │
-├── outputs/
-│   ├── figures/
-│   └── reports/
-│
 ├── src/
-│   └── analysis_functions.py
+│   ├── data_loader.py
+│   ├── returns.py
+│   └── stats.py
 │
+├── config.py
 ├── requirements.txt
+├── .gitignore
 └── README.md
 ```
 
