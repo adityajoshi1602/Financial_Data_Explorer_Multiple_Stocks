@@ -42,10 +42,6 @@ MULTIPLE_STOCKS/
 │   │   └── prices.csv
 │   │
 │   └── processed/
-│       ├── daily_log_returns.csv
-│       ├── weekly_returns.csv
-│       ├── monthly_returns.csv
-│       └── yearly_returns.csv
 │
 ├── notebook/
 │   └── 01_data_exploration.ipynb
