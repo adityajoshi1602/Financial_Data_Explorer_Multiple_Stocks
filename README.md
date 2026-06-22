@@ -1,88 +1,56 @@
-# Financial Data Explorer
+# Multiple Stocks Financial Data Analysis
 
-## Overview
-
-Financial Data Explorer is a Python-based exploratory data analysis project for financial time series data. The project focuses on understanding asset return characteristics, risk behavior, volatility dynamics, and drawdown patterns using statistical and visual analysis.
-
-The analysis transforms raw price data into meaningful financial insights through return calculations, descriptive statistics, distribution analysis, rolling metrics, and risk measurements.
-
----
-
-## Objectives
-
-* Download and analyze historical financial market data
-* Compute simple and logarithmic returns
-* Study return distributions and statistical properties
-* Measure volatility and risk characteristics
-* Analyze drawdowns and capital preservation risk
-* Visualize rolling performance and volatility regimes
-* Build a foundation for quantitative finance and risk management projects
+A Python-based financial data analysis project for downloading, processing, and analyzing historical stock market data. The project focuses on return analysis, descriptive statistics, risk metrics, rolling statistics, drawdowns, and normality testing using Pandas, NumPy, and SciPy.
 
 ---
 
 ## Features
 
-### Data Collection
-
-* Historical market data retrieval
-* Price cleaning and preprocessing
-* Missing value handling
-
-### Return Analysis
-
-* Daily returns
-* Log returns
-* Cumulative returns
-* Wealth index construction
-
-### Descriptive Statistics
-
-* Mean return
-* Annualized return
-* Standard deviation
-* Annualized volatility
-* Skewness
-* Kurtosis
-* Minimum and maximum returns
-
-### Distribution Analysis
-
-* Return histograms
-* Normal distribution comparison
-* Q-Q plots
-* Tail behavior inspection
-
-### Rolling Metrics
-
-* Rolling mean returns
-* Rolling volatility
-* Volatility clustering analysis
-* Market regime visualization
-
-### Risk Analysis
-
-* Drawdown calculation
-* Maximum drawdown
-* Peak-to-trough analysis
-* Wealth curve tracking
+- Download and clean historical stock price data
+- Compute:
+  - Daily Log Returns
+  - Weekly Returns
+  - Monthly Returns
+  - Yearly Returns
+- Generate descriptive statistics
+- Perform risk analysis
+- Calculate:
+  - Value at Risk (VaR)
+  - Expected Shortfall (CVaR)
+  - Sharpe Ratio
+  - Sortino Ratio
+  - Calmar Ratio
+  - Maximum Drawdown
+  - CAGR
+- Rolling 30-Day Analysis
+- Normality Testing
+  - Jarque-Bera Test
+  - Shapiro-Wilk Test
+  - D'Agostino K² Test
+- Drawdown analysis
+- Jupyter Notebook for exploratory data analysis
 
 ---
 
 ## Project Structure
 
-## Project Structure
-
-```text
-Financial-Data-Explorer/
+```
+MULTIPLE_STOCKS/
 │
 ├── data/
 │   ├── raw/
 │   │   └── prices.csv
 │   │
 │   └── processed/
+│       ├── daily_log_returns.csv
+│       ├── weekly_returns.csv
+│       ├── monthly_returns.csv
+│       └── yearly_returns.csv
 │
 ├── notebook/
 │   └── 01_data_exploration.ipynb
+│
+├── plots/
 │
 ├── src/
 │   ├── data_loader.py
@@ -90,91 +58,193 @@ Financial-Data-Explorer/
 │   └── stats.py
 │
 ├── config.py
-├── requirements.txt
-├── .gitignore
-└── README.md
+├── README.md
+└── .gitignore
 ```
 
 ---
 
 ## Technologies Used
 
-* Python
-* Pandas
-* NumPy
-* Matplotlib
-* SciPy
-* yfinance
+- Python 3.x
+- Pandas
+- NumPy
+- SciPy
+- Matplotlib
+- Jupyter Notebook
 
 ---
 
-## Key Concepts Covered
+## Statistical Metrics
 
-### Return Modeling
+### Descriptive Statistics
 
-* Percentage returns
-* Logarithmic returns
-* Compounding
-
-### Risk Measurement
-
-* Volatility
-* Annualization
-* Drawdowns
-
-### Statistical Analysis
-
-* Distribution properties
-* Skewness
-* Kurtosis
-* Normality assessment
-
-### Time-Series Analysis
-
-* Rolling statistics
-* Volatility clustering
-* Market regimes
+- Mean Daily Return
+- Annualized Return
+- Daily Standard Deviation
+- Annualized Volatility
+- Skewness
+- Excess Kurtosis
+- Minimum Return
+- Maximum Return
+- Naive Sharpe Ratio
 
 ---
 
-## Example Workflow
+### Risk Metrics
 
-1. Download historical asset prices
-2. Clean and preprocess data
-3. Compute returns
-4. Generate descriptive statistics
-5. Analyze distributions
-6. Calculate rolling metrics
-7. Measure drawdowns
-8. Visualize results
-9. Interpret risk characteristics
+- Parametric Value at Risk (95%)
+- Historical Value at Risk (95%)
+- Expected Shortfall (CVaR)
+- Sharpe Ratio
+- Sortino Ratio
+- Semi-Deviation
+- Maximum Drawdown
+- CAGR
+- Calmar Ratio
+- Tracking Error *(optional benchmark)*
+- Information Ratio *(optional benchmark)*
 
 ---
 
-## Sample Insights
+### Normality Tests
 
-* Financial returns are rarely normally distributed.
-* Volatility changes over time and often clusters.
-* Large drawdowns can occur even when average returns appear attractive.
-* Risk-adjusted performance is more informative than raw returns.
-* Rolling metrics reveal changing market regimes that static statistics can hide.
+The project evaluates whether stock returns follow a normal distribution using:
+
+- Jarque-Bera Test
+- Shapiro-Wilk Test
+- D'Agostino K² Test
+
+---
+
+### Rolling Analysis
+
+Using a rolling 30-day window:
+
+- Rolling Mean Return
+- Rolling Volatility
+- Rolling Sharpe Ratio
+
+---
+
+### Drawdown Analysis
+
+For each stock:
+
+- Running Maximum Price
+- Drawdown Series
+- Maximum Drawdown
+
+---
+
+## Workflow
+
+```
+Historical Prices
+        │
+        ▼
+Data Cleaning
+        │
+        ▼
+Return Calculation
+        │
+        ▼
+Descriptive Statistics
+        │
+        ▼
+Risk Analysis
+        │
+        ▼
+Rolling Metrics
+        │
+        ▼
+Normality Testing
+        │
+        ▼
+Visualization
+```
+
+---
+
+## Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/yourusername/multiple-stocks-analysis.git
+
+cd multiple-stocks-analysis
+```
+
+Install dependencies
+
+```bash
+pip install pandas numpy scipy matplotlib jupyter yfinance
+```
+
+---
+
+## Usage
+
+Run the Jupyter notebook:
+
+```bash
+jupyter notebook notebook/01_data_exploration.ipynb
+```
+
+Or import the modules directly:
+
+```python
+from src.stats import descriptive
+from src.stats import risk_analysis
+from src.stats import normality
+from src.stats import rolling_metrics
+from src.stats import drawdown_series
+```
+
+---
+
+## Example Outputs
+
+The project generates:
+
+- Processed return datasets
+- Summary statistics tables
+- Risk metrics tables
+- Rolling performance metrics
+- Drawdown analysis
+- Distribution and return visualizations
 
 ---
 
 ## Future Improvements
 
-* Value at Risk (VaR)
-* Expected Shortfall (ES)
-* Sharpe Ratio
-* Sortino Ratio
-* CAPM Analysis
-* Multi-Asset Portfolio Analytics
-* GARCH Volatility Modeling
-* Monte Carlo Simulation
-* Factor Analysis
+- CAPM Metrics
+- Beta & Alpha
+- Portfolio Optimization
+- Efficient Frontier
+- Monte Carlo Portfolio Simulation
+- Fama-French Factor Models
+- GARCH Volatility Forecasting
+- Correlation Heatmaps
+- Interactive Plotly Dashboard
+- Automated Report Generation
 
 ---
 
-## Author
+## Learning Objectives
 
-Created as part of a quantitative finance and financial data analysis learning journey, focusing on practical applications of statistics, risk management, and financial market analysis.
+This project demonstrates practical applications of:
+
+- Financial Time Series Analysis
+- Risk Management
+- Quantitative Finance
+- Statistical Analysis
+- Portfolio Performance Evaluation
+- Python for Financial Data Science
+
+---
+
+## License
+
+This project is intended for educational and research purposes.
