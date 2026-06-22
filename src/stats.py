@@ -69,6 +69,7 @@ def risk_analysis(returns, benchmark_returns=None, risk_free_rate=0.05):
 
     return out.round(4)
 
+
 def normality(returns):
     results = []
 
@@ -84,18 +85,36 @@ def normality(returns):
         else:
             da_stat, da_p = np.nan, np.nan
 
-        results.append({
-            "Stock": col,
-            "Jarque-Bera Stat": round(jb_stat, 3),
-            "Jarque-Bera p": round(jb_p, 5),
-            "JB Reject": jb_p < 0.05,
-
-            "Shapiro Stat": round(sw_stat, 3) if not np.isnan(sw_stat) else None,
-            "Shapiro p": round(sw_p, 5) if not np.isnan(sw_p) else None,
-            "SW Reject": sw_p < 0.05 if not np.isnan(sw_p) else None,
-
-            "D'Agostino Stat": round(da_stat, 3) if not np.isnan(da_stat) else None,
-            "D'Agostino p": round(da_p, 5) if not np.isnan(da_p) else None,
-            "DA Reject": da_p < 0.05 if not np.isnan(da_p) else None,
-        })
+        results.append(
+            {
+                "Stock": col,
+                "Jarque-Bera Stat": round(jb_stat, 3),
+                "Jarque-Bera p": round(jb_p, 5),
+                "JB Reject": jb_p < 0.05,
+                "Shapiro Stat": round(sw_stat, 3) if not np.isnan(sw_stat) else None,
+                "Shapiro p": round(sw_p, 5) if not np.isnan(sw_p) else None,
+                "SW Reject": sw_p < 0.05 if not np.isnan(sw_p) else None,
+                "D'Agostino Stat": round(da_stat, 3) if not np.isnan(da_stat) else None,
+                "D'Agostino p": round(da_p, 5) if not np.isnan(da_p) else None,
+                "DA Reject": da_p < 0.05 if not np.isnan(da_p) else None,
+            }
+        )
     return pd.DataFrame(results)
+
+
+def rolling_metrics(returns):
+    out = pd.DataFrame(index=returns.columns)
+
+    rolling_mean = returns.rolling(30).mean().iloc[-1] * 252
+    rolling_vol = returns.rolling(30).std().iloc[-1] * np.sqrt(252)
+
+    out["rolling_mean"] = rolling_mean
+    out["rolling_vol"] = rolling_vol
+    out["rolling_sharpe"] = rolling_mean / rolling_vol
+
+    return out
+
+def drawdown_series(prices: pd.Series) -> pd.DataFrame:
+    running_max = prices.cummax()
+    dd = prices / running_max - 1
+    return pd.DataFrame({"price": prices, "running_max": running_max, "drawdown": dd})
